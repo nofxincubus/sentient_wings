@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Galactic Chef</title>
+	</head>
+	<body>
+		<h1 style ="font-family:Garamond;">Galactic Chef: cooking up awesome</h1>
+		<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
+		</canvas>
+	<script>
+		// Init Canvas
+		var c=document.getElementById("myCanvas");
+		var ctx = c.getContext("2d");
+		
+		// Create UAV
+		function createUAV(x,y)
+		{
+			ctx.moveTo(x,y);
+			ctx.lineTo(x-50,y+100);
+			ctx.lineTo(x+50,y+100);
+			ctx.lineTo(x,y);
+			ctx.stroke();
+			
+			// Create UAV Text
+			ctx.font="30px Arial";
+			ctx.fillText("UAV", x-50,y+140);
+		}
+		
+		// Create Circle
+		ctx.beginPath();
+		ctx.arc(300,300,50,0,2*Math.PI);
+		ctx.stroke();
+		
+
+		
+		
+	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+	 
+	if (document.attachEvent) //if IE (and Opera depending on user setting)
+		document.attachEvent("on"+mousewheelevt, createUAV(100,100))
+	else if (document.addEventListener) //WC3 browsers
+		document.addEventListener(mousewheelevt, createUAV(100,100), false)
+	</script>
+	</body>
+</html>
