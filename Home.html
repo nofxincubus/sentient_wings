@@ -2,12 +2,15 @@
 <html>
 	<head>
 		<title>Galactic Chef</title>
+        
+        <script type="text/javascript" src="main.js"></script>
 	</head>
 	<body>
 		<h1 style ="font-family:Garamond;">Galactic Chef: cooking up awesome</h1>
 		<canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;">
 		</canvas>
 	<script>
+<<<<<<< HEAD
 		// Init Canvas
 		var c=document.getElementById("myCanvas");
 		var ctx = c.getContext("2d");
@@ -41,6 +44,9 @@
 		document.attachEvent("on"+mousewheelevt, createUAV(100,100))
 	else if (document.addEventListener) //WC3 browsers
 		document.addEventListener(mousewheelevt, createUAV(100,100), false)
+=======
+		initialize();
+>>>>>>> d34a7e904da4ab2459e0a7279ca8bacd3f4aaf5e
 	</script>
 	</body>
 </html>
