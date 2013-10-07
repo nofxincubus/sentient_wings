@@ -17,6 +17,15 @@ function el(s)
 	return document.getElementById(s);
 }
 
+var  greenIcon = L.icon({
+    iconUrl: './images/drone-tiny.png',
+
+    iconSize:     [75, 50], // size of the icon
+    iconAnchor:   [37, 25], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 function initialize(){
 	
 /*
@@ -28,42 +37,24 @@ function initialize(){
 		document.addEventListener(mousewheelevt, createUAV(ctx, 100,100), false)
 
 */
-	var map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map("map").setView([51.505, -0.09], 13);
 
 		L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 		}).addTo(map);
 
-
-		L.marker([51.5, -0.09]).addTo(map)
-			.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
-
-		L.circle([51.508, -0.11], 500, {
-			color: 'red',
-			fillColor: '#f03',
-			fillOpacity: 0.5
-		}).addTo(map).bindPopup("I am a circle.");
-
-		L.polygon([
-			[51.509, -0.08],
-			[51.503, -0.06],
-			[51.51, -0.047]
-		]).addTo(map).bindPopup("I am a polygon.");
-
-		
-
-
-		var popup = L.popup();
-
-		function onMapClick(e) {
-			popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString())
-				.openOn(map);
-		}
-
 		map.on('click', onMapClick);
+		x = L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
+
+
+
+}
+
+function onMapClick(){
+	var latlon = x.getLatLng();
+	var newLatLon = new L.LatLng(latlon.lat + 0.00001, latlon.lng + 0.00001);
+	x.setLatLng( newLatLon);
 }
 		
 	
