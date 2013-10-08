@@ -27,28 +27,26 @@ var  greenIcon = L.icon({
 });
 
 function initialize(){
-	
-/*
-	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
-	 
-	if (document.attachEvent) //if IE (and Opera depending on user setting)
-		document.attachEvent("on"+mousewheelevt, createUAV(ctx, 100,100))
-	else if (document.addEventListener) //WC3 browsers
-		document.addEventListener(mousewheelevt, createUAV(ctx, 100,100), false)
+	var map = L.map("map").setView([51.505, -0.09], 13);
 
-*/
-var map = L.map("map").setView([51.505, -0.09], 13);
-
-		L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
+	L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 		}).addTo(map);
 
-		map.on('click', onMapClick);
-		x = L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
+	map.on('click', onMapClick);
 
+	uavNumberOne = new UAV(51.5, -0.09, 100);
+	uavNumberOne.setLeafletMarker(L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map));
 
+	onEF();
 
+}
+
+function onEF()
+{
+	window.requestAnimFrame(onEF);
+	uavNumberOne.update();
 }
 
 function onMapClick(){
@@ -56,7 +54,6 @@ function onMapClick(){
 	var newLatLon = new L.LatLng(latlon.lat + 0.00001, latlon.lng + 0.00001);
 	x.setLatLng( newLatLon);
 }
-		
 	
 // Create UAV
 function createUAV(ctx, x, y)
