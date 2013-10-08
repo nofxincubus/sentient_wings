@@ -1,6 +1,5 @@
 // JavaScript Document
 
-
 function UAV(lat, lon, alt){
 	//Basic Info
 	this.latitude = lat;
@@ -31,6 +30,7 @@ function UAV(lat, lon, alt){
 	});
 }
 
+//Assigns marker to the UAV object
 UAV.prototype.setLeafletMarker = function(marker){
 	this.leafletMarker = marker;
 }
@@ -47,9 +47,15 @@ UAV.prototype.setNextWaypoint = function(newWayPoint) {
 };
 
 UAV.prototype.update = function(){
+	//Calculate new latitude or other stuff as you want
 	this.latitude = this.latitude + this.velocity/100000;
+
+	//Create a new LatLng variable used by Leaflet
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
+
+	//Update the position of the marker with the newLatLon variable you have just created
 	this.leafletMarker.setLatLng( newLatLon);
+	this.leafletMarker.setRotate(this.velocity);
 }
 
 

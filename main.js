@@ -27,6 +27,15 @@ var  greenIcon = L.icon({
 });
 
 function initialize(){
+	debugForZDiv = el('yayayay');
+
+	var para=document.createElement("p");
+	var node=document.createTextNode("WHAT THE FUCKKKKK");
+	para.appendChild(node);
+
+	
+	debugForZDiv.appendChild(para);
+
 	var map = L.map("map").setView([51.505, -0.09], 13);
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
@@ -34,10 +43,11 @@ function initialize(){
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 		}).addTo(map);
 
-	map.on('click', onMapClick);
+	//map.on('click', onMapClick);
 
 	uavNumberOne = new UAV(51.5, -0.09, 100);
-	uavNumberOne.setLeafletMarker(L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map));
+	var MARKER = L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
+	uavNumberOne.setLeafletMarker(MARKER);
 
 	onEF();
 
