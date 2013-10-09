@@ -71,11 +71,11 @@ UAV.prototype.update = function(){
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){
 		this.popup = L.popup()
-    	.setContent("heading " + this.heading + "</b>desHed " + desiredHeading + "</b>lat " + this.latitude + "</b>lon " + this.longitude);
+    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
 		this.leafletMarker.bindPopup(this.popup).openPopup();
 		popupOpened = true
 	} else {
-		this.popup.setContent("heading " + this.heading + "</b>desHed " + desiredHeading + "</b>lat " + this.latitude + "</b>lon " + this.longitude);
+		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
 	}
 	
 }
