@@ -45,7 +45,7 @@ UAV.prototype.setNextWaypoint = function(newWayPoint) {
 		this.currentWaypoint = this.waypointList[this.waypointList.length];
 	}
 };
-
+popupOpened = false;
 UAV.prototype.update = function(){
 	//Calculate new latitude or other stuff as you want
 	var desiredLatitude = 51.505; //desired waypoint latlong
@@ -68,7 +68,16 @@ UAV.prototype.update = function(){
 
 	//Update the position of the marker with the newLatLon variable you have just created
 	this.leafletMarker.setLatLng( newLatLon);
-	this.leafletMarker.setRotate(this.velocity);
+	//this.leafletMarker.setRotate(this.velocity);
+	if (!popupOpened){
+		this.popup = L.popup()
+    	.setContent("heading " + this.heading + "</b>desHed " + desiredHeading + "</b>lat " + this.latitude + "</b>lon " + this.longitude);
+		this.leafletMarker.bindPopup(this.popup).openPopup();
+		popupOpened = true
+	} else {
+		this.popup.setContent("heading " + this.heading + "</b>desHed " + desiredHeading + "</b>lat " + this.latitude + "</b>lon " + this.longitude);
+	}
+	
 }
 
 
