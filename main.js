@@ -64,19 +64,3 @@ function onMapClick(){
 	var newLatLon = new L.LatLng(latlon.lat + 0.00001, latlon.lng + 0.00001);
 	x.setLatLng( newLatLon);
 }
-	
-// Create UAV
-function createUAV(ctx, x, y)
-{
-	ctx.moveTo(x,y);
-	ctx.lineTo(x-50,y+100);
-	ctx.lineTo(x+50,y+100);
-	ctx.lineTo(x,y);
-	ctx.stroke();
-	
-	// Create UAV Text
-	ctx.font="30px Arial";
-	ctx.fillText("UAV", x-50,y+140);
-}
-		
-	

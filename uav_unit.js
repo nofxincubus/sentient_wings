@@ -48,8 +48,21 @@ UAV.prototype.setNextWaypoint = function(newWayPoint) {
 
 UAV.prototype.update = function(){
 	//Calculate new latitude or other stuff as you want
-	this.latitude = this.latitude + this.velocity/100000;
-
+	var desiredLatitude = 51.505; //desired waypoint latlong
+	var desiredLongitude = -0.09;
+	
+	var desiredHeading = Math.tan((desiredLatitude-this.latitude)/(desiredLongitude-this.longitude));
+	
+	if (desiredHeading > this.heading)
+	{this.heading+=.01;}
+	else if(desiredHeading < this.heading)
+	{this.heading-=.01;}
+	else
+	{}//do nothing}
+	//this.heading = desiredHeading;
+	// New position function of old position, heading and velocity
+	this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
+	this.longitude = this.longitude + this.velocity/100000*Math.cos(this.heading);
 	//Create a new LatLng variable used by Leaflet
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
