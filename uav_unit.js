@@ -51,7 +51,7 @@ UAV.prototype.update = function(){
 	var desiredLatitude = 51.505; //desired waypoint latlong
 	var desiredLongitude = -0.09;
 	
-	var desiredHeading = Math.tan((desiredLatitude-this.latitude)/(desiredLongitude-this.longitude));
+	var desiredHeading = Math.atan2((desiredLatitude-this.latitude),(desiredLongitude-this.longitude));
 	
 	if (desiredHeading > this.heading)
 	{this.heading+=.01;}
@@ -71,11 +71,11 @@ UAV.prototype.update = function(){
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){
 		this.popup = L.popup()
-    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
+    	.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
 		this.leafletMarker.bindPopup(this.popup).openPopup();
 		popupOpened = true
 	} else {
-		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
+		this.popup.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
 	}
 	
 }
