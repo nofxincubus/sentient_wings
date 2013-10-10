@@ -9,7 +9,7 @@ function UAV(lat, lon, alt){
 	this.altitude = alt;
 
 	//0 to 360
-	this.heading = 45;
+	this.heading = 45*Math.PI/180;
 
 	//Velocity
 	this.velocity = 10;
@@ -53,14 +53,15 @@ popupOpened = false;
 
  
 UAV.prototype.update = function(){
-	desiredLatitude = 51.5; //desired waypoint latlong
-	desiredLongitude = -0.09;
+	desiredLatitude = 51.52; //desired waypoint latlong
+	desiredLongitude = -0.07;
 	//Calculate new latitude or other stuff as you want
 	var y = desiredLatitude-this.latitude;
 	var x = desiredLongitude-this.longitude;
 	// maps it to +180 -> -180
 	var desiredHeading = Math.atan2(y,x);
-		
+	if (this.heading <0)
+		{this.heading = this.heading +360;}
 	if (desiredHeading > this.heading)
 		{this.heading+=.01;}
 	else if(desiredHeading < this.heading)
