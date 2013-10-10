@@ -1,13 +1,15 @@
 // JavaScript Document
 
+
 function UAV(lat, lon, alt){
+
 	//Basic Info
 	this.latitude = lat;
 	this.longitude = lon;
 	this.altitude = alt;
 
 	//0 to 360
-	this.heading = 0;
+	this.heading = 45;
 
 	//Velocity
 	this.velocity = 10;
@@ -46,19 +48,24 @@ UAV.prototype.setNextWaypoint = function(newWayPoint) {
 	}
 };
 popupOpened = false;
+
+
+
+ 
 UAV.prototype.update = function(){
+	desiredLatitude = 51.5; //desired waypoint latlong
+	desiredLongitude = -0.09;
 	//Calculate new latitude or other stuff as you want
-	var desiredLatitude = 51.505; //desired waypoint latlong
-	var desiredLongitude = -0.09;
-	
-	var desiredHeading = Math.atan2((desiredLatitude-this.latitude),(desiredLongitude-this.longitude));
-	
+	var y = desiredLatitude-this.latitude;
+	var x = desiredLongitude-this.longitude;
+	// maps it to +180 -> -180
+	var desiredHeading = Math.atan2(y,x);
+		
 	if (desiredHeading > this.heading)
-	{this.heading+=.01;}
+		{this.heading+=.01;}
 	else if(desiredHeading < this.heading)
-	{this.heading-=.01;}
-	else
-	{}//do nothing}
+		{this.heading-=.01;}
+			
 	//this.heading = desiredHeading;
 	// New position function of old position, heading and velocity
 	this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
@@ -71,11 +78,11 @@ UAV.prototype.update = function(){
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){
 		this.popup = L.popup()
-    	.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
+    	.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
 		this.leafletMarker.bindPopup(this.popup).openPopup();
 		popupOpened = true
 	} else {
-		this.popup.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude);
+		this.popup.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude + "<br /> y " + y + "<br /> x " + x);
 	}
 	
 }
