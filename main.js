@@ -27,14 +27,6 @@ var  greenIcon = L.icon({
 });
 
 function initialize(){
-	debugForZDiv = el('yayayay');
-
-	var para=document.createElement("p");
-	var node=document.createTextNode("WHAT THE FUCKKKKK");
-	para.appendChild(node);
-
-	
-	debugForZDiv.appendChild(para);
 
 	var map = L.map("map").setView([51.505, -0.09], 13);
 
