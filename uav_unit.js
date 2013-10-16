@@ -78,8 +78,11 @@ UAV.prototype.update = function(){
 	//Create a new LatLng variable used by Leaflet
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
+
+	//Rotate the uav
+	this.leafletMarker.setIconAngle(-this.heading*180/Math.PI);
+	
 	//Update the position of the marker with the newLatLon variable you have just created
-	this.leafletMarker.setIconAngle(this.heading*180/Math.PI);
 	this.leafletMarker.setLatLng( newLatLon);
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){

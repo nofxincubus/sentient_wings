@@ -38,7 +38,8 @@ function initialize(){
 	map.on('click', onMapClick);
 
 	uavNumberOne = new UAV(37.3868, -122.0678, 100);
-	var MARKER = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 90}).addTo(map);
+	//Initialize with rotate
+	var MARKER = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
 	uavNumberOne.setLeafletMarker(MARKER);
 
 	onEF();
