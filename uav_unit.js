@@ -60,8 +60,10 @@ UAV.prototype.update = function(){
 	var x = desiredLongitude-this.longitude;
 	// maps it to +180 -> -180
 	var desiredHeading = Math.atan2(y,x);
-	if (this.heading <0)
-		{this.heading = this.heading +360;}
+	if (this.heading <0*Math.PI/180)
+		{this.heading = this.heading +360*Math.PI/180;}
+		if (this.heading >360*Math.PI/180)
+		{this.heading = this.heading -360*Math.PI/180;}
 	if (desiredHeading > this.heading)
 		{this.heading+=.01;}
 	else if(desiredHeading < this.heading)
