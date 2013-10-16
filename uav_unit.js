@@ -60,6 +60,7 @@ UAV.prototype.update = function(){
 	var x = desiredLongitude-this.longitude;
 	// maps it to +180 -> -180
 	var desiredHeading = Math.atan2(y,x);
+
 	if (this.heading <0*Math.PI/180)
 		{this.heading = this.heading +360*Math.PI/180;}
 		if (this.heading >360*Math.PI/180)
@@ -85,6 +86,7 @@ UAV.prototype.update = function(){
 	//Update the position of the marker with the newLatLon variable you have just created
 	this.leafletMarker.setLatLng( newLatLon);
 	//this.leafletMarker.setRotate(this.velocity);
+	/*
 	if (!popupOpened){
 		this.popup = L.popup()
     	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
@@ -93,6 +95,7 @@ UAV.prototype.update = function(){
 	} else {
 		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude +  "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + "<br /> y " + y + "<br /> x " + x);
 	}
+	*/
 	
 }
 
