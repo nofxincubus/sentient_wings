@@ -6,6 +6,7 @@ function UAV(initialPoint){
 	//Basic Info
 	this.latitude = initialPoint.lat;
 	this.longitude = initialPoint.lng;
+	this.finalPoint = new L.LatLng(37.468864,-122.204361);
 
 	//0 to 360
 	this.heading = 45*Math.PI/180;
@@ -101,6 +102,12 @@ UAV.prototype.update = function(){
 UAV.prototype.setWaypoint = function(waypoint){
 	this.currentWaypoint = waypoint;
 }
+
+UAV.prototype.goToFinal = function(){
+	this.currentWaypoint = this.finalPoint;
+}
+
+
 
 
 
