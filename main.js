@@ -35,7 +35,7 @@ function initialize(){
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
 		}).addTo(map);
 
-	//map.on('click', onMapClick);
+	map.on('click', onMapClick);
 
 	uavNumberOne = new UAV(51.5, -0.09, 100);
 	var MARKER = L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
@@ -51,8 +51,6 @@ function onEF()
 	uavNumberOne.update();
 }
 
-function onMapClick(){
-	var latlon = x.getLatLng();
-	var newLatLon = new L.LatLng(latlon.lat + 0.00001, latlon.lng + 0.00001);
-	x.setLatLng( newLatLon);
+function onMapClick(e){
+	uavNumberOne.setWaypoint(e.latlng);
 }

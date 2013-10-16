@@ -20,7 +20,7 @@ function UAV(lat, lon, alt){
 	this.fuelLevel = 0;
 
 	this.waypointList = new Array();
-	this.currentWaypoint = null;
+	this.currentWaypoint = new L.LatLng(51.52,-0.07);
 
 	this.uavIcon = L.icon({
 	    iconUrl: './images/drone-tiny.png',
@@ -53,8 +53,8 @@ popupOpened = false;
 
  
 UAV.prototype.update = function(){
-	desiredLatitude = 51.52; //desired waypoint latlong
-	desiredLongitude = -0.07;
+	desiredLatitude = this.currentWaypoint.lat; //desired waypoint latlong
+	desiredLongitude = this.currentWaypoint.lng;
 	//Calculate new latitude or other stuff as you want
 	var y = desiredLatitude-this.latitude;
 	var x = desiredLongitude-this.longitude;
@@ -66,6 +66,8 @@ UAV.prototype.update = function(){
 		{this.heading+=.01;}
 	else if(desiredHeading < this.heading)
 		{this.heading-=.01;}
+
+
 			
 	//this.heading = desiredHeading;
 	// New position function of old position, heading and velocity
@@ -75,17 +77,22 @@ UAV.prototype.update = function(){
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
 	//Update the position of the marker with the newLatLon variable you have just created
+
 	this.leafletMarker.setLatLng( newLatLon);
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){
 		this.popup = L.popup()
-    	.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
+    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
 		this.leafletMarker.bindPopup(this.popup).openPopup();
-		popupOpened = true
+		popupOpened = true;
 	} else {
-		this.popup.setContent("heading " + this.heading*180/Math.PI + "<br />desHed " + desiredHeading*180/Math.PI + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude + "<br /> y " + y + "<br /> x " + x);
+		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude + "<br /> y " + y + "<br /> x " + x);
 	}
 	
+}
+
+UAV.prototype.setWaypoint = function(waypoint){
+	this.currentWaypoint = waypoint;
 }
 
 
