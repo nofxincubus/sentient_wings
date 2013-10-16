@@ -1,12 +1,11 @@
 // JavaScript Document
 
 
-function UAV(lat, lon, alt){
+function UAV(initialPoint){
 
 	//Basic Info
-	this.latitude = lat;
-	this.longitude = lon;
-	this.altitude = alt;
+	this.latitude = initialPoint.lat;
+	this.longitude = initialPoint.lng;
 
 	//0 to 360
 	this.heading = 45*Math.PI/180;

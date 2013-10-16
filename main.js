@@ -37,56 +37,29 @@ function initialize(){
 
 	map.on('click', onMapClick);
 
-	uavNumber1 = new UAV(37.3868, -122.0678, 100);
-	uavNumber2 = new UAV(37.3868, -122.0678, 100);
-	uavNumber3 = new UAV(37.3868, -122.0678, 100);
-	uavNumber4 = new UAV(37.3868, -122.0678, 100);
-	uavNumber5 = new UAV(37.3868, -122.0678, 100);
-	uavNumber6 = new UAV(37.3868, -122.0678, 100);
-	uavNumber7 = new UAV(37.3868, -122.0678, 100);
-	uavNumber8 = new UAV(37.3868, -122.0678, 100);
-	uavNumber9 = new UAV(37.3868, -122.0678, 100);
+	var initialUavPoint = new L.LatLng(37.3468, -122.0000)
 
-	uavNumber1.setWaypoint(new L.LatLng(37.400, -122.075));
-	uavNumber2.setWaypoint(new L.LatLng(37.400, -122.095));
-	uavNumber3.setWaypoint(new L.LatLng(37.420, -122.055));
-	uavNumber4.setWaypoint(new L.LatLng(37.420, -122.075));
-	uavNumber5.setWaypoint(new L.LatLng(37.420, -122.095));
-	uavNumber6.setWaypoint(new L.LatLng(37.440, -122.055));
-	uavNumber7.setWaypoint(new L.LatLng(37.440, -122.075));
-	uavNumber8.setWaypoint(new L.LatLng(37.440, -122.095));
-	uavNumber9.setWaypoint(new L.LatLng(37.400, -122.055));
+	uavList = [];
+	for (i = 0;i < 9;i ++){
+		uavList[i] = new UAV(initialUavPoint);
+	}
 
-	//Initialize with rotate
-	var MARKER1 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER2 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER3 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER4 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER5 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER6 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER7 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER8 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
-	var MARKER9 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
+	waypoint = [];
+	waypoint[0] = new L.LatLng(37.400, -122.075);
+	waypoint[1] = new L.LatLng(37.400, -122.095);
+	waypoint[2] = new L.LatLng(37.420, -122.055);
+	waypoint[3] = new L.LatLng(37.420, -122.075);
+	waypoint[4] = new L.LatLng(37.420, -122.095);
+	waypoint[5] = new L.LatLng(37.440, -122.055);
+	waypoint[6] = new L.LatLng(37.440, -122.075);
+	waypoint[7] = new L.LatLng(37.440, -122.095);
+	waypoint[8] = new L.LatLng(37.400, -122.055);
 
-	uavNumber1.setLeafletMarker(MARKER1);
-	uavNumber2.setLeafletMarker(MARKER2);
-	uavNumber3.setLeafletMarker(MARKER3);
-	uavNumber4.setLeafletMarker(MARKER4);
-	uavNumber5.setLeafletMarker(MARKER5);
-	uavNumber6.setLeafletMarker(MARKER6);
-	uavNumber7.setLeafletMarker(MARKER7);
-	uavNumber8.setLeafletMarker(MARKER8);
-	uavNumber9.setLeafletMarker(MARKER9);
-
-	var MARK1 = L.marker([37.400, -122.075]).addTo(map);
-	var MARK2 = L.marker([37.400, -122.095]).addTo(map);
-	var MARK3 = L.marker([37.420, -122.055]).addTo(map);
-	var MARK4 = L.marker([37.420, -122.075]).addTo(map);
-	var MARK5= L.marker([37.420, -122.095]).addTo(map);
-	var MARK6 = L.marker([37.440, -122.055]).addTo(map);
-	var MARK7 = L.marker([37.440, -122.075]).addTo(map);
-	var MARK8 = L.marker([37.440, -122.095]).addTo(map);
-	var MARK9 = L.marker([37.400, -122.055]).addTo(map);
+	for (i = 0;i < 9;i ++){
+		uavList[i].setWaypoint(waypoint[i]);
+		uavList[i].setLeafletMarker(L.marker(initialUavPoint, {icon: greenIcon,iconAngle: 0}).addTo(map));
+		L.marker(waypoint[i]).addTo(map);
+	}
 
 	onEF();
 }
@@ -94,15 +67,9 @@ function initialize(){
 function onEF()
 {
 	window.requestAnimFrame(onEF);
-	uavNumber1.update();
-	uavNumber2.update();
-	uavNumber3.update();
-	uavNumber4.update();
-	uavNumber5.update();
-	uavNumber6.update();
-	uavNumber7.update();
-	uavNumber8.update();
-	uavNumber9.update();
+	for (i = 0;i < 9;i ++){
+		uavList[i].update();
+	}
 }
 
 function onMapClick(e){
