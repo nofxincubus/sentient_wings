@@ -84,11 +84,11 @@ UAV.prototype.update = function(){
 	//this.leafletMarker.setRotate(this.velocity);
 	if (!popupOpened){
 		this.popup = L.popup()
-    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
+    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
 		this.leafletMarker.bindPopup(this.popup).openPopup();
 		popupOpened = true;
 	} else {
-		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />lon " + this.longitude +"<br /> deslong " + desiredLongitude + "<br /> y " + y + "<br /> x " + x);
+		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude +  "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + "<br /> y " + y + "<br /> x " + x);
 	}
 	
 }
