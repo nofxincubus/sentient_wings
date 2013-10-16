@@ -28,7 +28,7 @@ var  greenIcon = L.icon({
 
 function initialize(){
 
-	var map = L.map("map").setView([51.505, -0.09], 13);
+	map = L.map("map").setView([51.505, -0.09], 13);
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
@@ -53,4 +53,7 @@ function onEF()
 
 function onMapClick(e){
 	uavNumberOne.setWaypoint(e.latlng);
+	
+	MARKER = L.marker(e.latlng).addTo(map);
+
 }
