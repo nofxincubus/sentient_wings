@@ -20,7 +20,7 @@ function UAV(lat, lon, alt){
 	this.fuelLevel = 0;
 
 	this.waypointList = new Array();
-	this.currentWaypoint = new L.LatLng(51.52,-0.07);
+	this.currentWaypoint = new L.LatLng(37.3868, -122.0678);
 
 	this.uavIcon = L.icon({
 	    iconUrl: './images/drone-tiny.png',

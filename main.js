@@ -27,8 +27,8 @@ var  greenIcon = L.icon({
 });
 
 function initialize(){
-
-	map = L.map("map").setView([51.505, -0.09], 13);
+	
+	map = L.map("map").setView([37.3868, -122.0678], 13);
 
 	L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
@@ -37,8 +37,8 @@ function initialize(){
 
 	map.on('click', onMapClick);
 
-	uavNumberOne = new UAV(51.5, -0.09, 100);
-	var MARKER = L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map);
+	uavNumberOne = new UAV(37.3868, -122.0678, 100);
+	var MARKER = L.marker([37.3868, -122.0678], {icon: greenIcon}).addTo(map);
 	uavNumberOne.setLeafletMarker(MARKER);
 
 	onEF();
