@@ -47,15 +47,15 @@ function initialize(){
 	uavNumber8 = new UAV(37.3868, -122.0678, 100);
 	uavNumber9 = new UAV(37.3868, -122.0678, 100);
 
-	uavNumber1.setWaypoint(new L.LatLng(37.390, -122.070));
-	uavNumber2.setWaypoint(new L.LatLng(37.390, -122.075));
-	uavNumber3.setWaypoint(new L.LatLng(37.395, -122.065));
-	uavNumber4.setWaypoint(new L.LatLng(37.395, -122.070));
-	uavNumber5.setWaypoint(new L.LatLng(37.395, -122.075));
-	uavNumber6.setWaypoint(new L.LatLng(37.400, -122.065));
-	uavNumber7.setWaypoint(new L.LatLng(37.400, -122.070));
-	uavNumber8.setWaypoint(new L.LatLng(37.400, -122.075));
-	uavNumber9.setWaypoint(new L.LatLng(37.390, -122.065));
+	uavNumber1.setWaypoint(new L.LatLng(37.400, -122.075));
+	uavNumber2.setWaypoint(new L.LatLng(37.400, -122.095));
+	uavNumber3.setWaypoint(new L.LatLng(37.420, -122.055));
+	uavNumber4.setWaypoint(new L.LatLng(37.420, -122.075));
+	uavNumber5.setWaypoint(new L.LatLng(37.420, -122.095));
+	uavNumber6.setWaypoint(new L.LatLng(37.440, -122.055));
+	uavNumber7.setWaypoint(new L.LatLng(37.440, -122.075));
+	uavNumber8.setWaypoint(new L.LatLng(37.440, -122.095));
+	uavNumber9.setWaypoint(new L.LatLng(37.400, -122.055));
 
 	//Initialize with rotate
 	var MARKER1 = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
@@ -78,15 +78,15 @@ function initialize(){
 	uavNumber8.setLeafletMarker(MARKER8);
 	uavNumber9.setLeafletMarker(MARKER9);
 
-	var MARK1 = L.marker([37.390,-122.070]).addTo(map);
-	var MARK2 = L.marker([37.390,-122.075]).addTo(map);
-	var MARK3 = L.marker([37.395,-122.065]).addTo(map);
-	var MARK4 = L.marker([37.395,-122.070]).addTo(map);
-	var MARK5= L.marker([37.395,-122.075]).addTo(map);
-	var MARK6 = L.marker([37.400,-122.065]).addTo(map);
-	var MARK7 = L.marker([37.400,-122.070]).addTo(map);
-	var MARK8 = L.marker([37.400,-122.075]).addTo(map);
-	var MARK9 = L.marker([37.390,-122.065]).addTo(map);
+	var MARK1 = L.marker([37.400, -122.075]).addTo(map);
+	var MARK2 = L.marker([37.400, -122.095]).addTo(map);
+	var MARK3 = L.marker([37.420, -122.055]).addTo(map);
+	var MARK4 = L.marker([37.420, -122.075]).addTo(map);
+	var MARK5= L.marker([37.420, -122.095]).addTo(map);
+	var MARK6 = L.marker([37.440, -122.055]).addTo(map);
+	var MARK7 = L.marker([37.440, -122.075]).addTo(map);
+	var MARK8 = L.marker([37.440, -122.095]).addTo(map);
+	var MARK9 = L.marker([37.400, -122.055]).addTo(map);
 
 	onEF();
 }

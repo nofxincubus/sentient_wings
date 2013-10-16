@@ -66,9 +66,9 @@ UAV.prototype.update = function(){
 		if (this.heading >360*Math.PI/180)
 		{this.heading = this.heading -360*Math.PI/180;}
 	if (desiredHeading > this.heading)
-		{this.heading+=.01;}
+		{this.heading+=.02;}
 	else if(desiredHeading < this.heading)
-		{this.heading-=.01;}
+		{this.heading-=.02;}
 
 
 			
