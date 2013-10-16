@@ -20,8 +20,8 @@ function el(s)
 var  greenIcon = L.icon({
     iconUrl: './images/drone-tiny.png',
 
-    iconSize:     [75, 50], // size of the icon
-    iconAnchor:   [37, 25], // point of the icon which will correspond to marker's location
+    iconSize:     [67, 67], // size of the icon
+    iconAnchor:   [33, 33], // point of the icon which will correspond to marker's location
     shadowAnchor: [4, 62],  // the same for the shadow
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
@@ -40,6 +40,7 @@ function initialize(){
 	uavNumberOne = new UAV(37.3868, -122.0678, 100);
 	//Initialize with rotate
 	var MARKER = L.marker([37.3868, -122.0678], {icon: greenIcon,iconAngle: 0}).addTo(map);
+	MARKER.setIconAngle(270);
 	uavNumberOne.setLeafletMarker(MARKER);
 
 	onEF();
