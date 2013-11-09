@@ -6,3 +6,12 @@
     width: 100%;
     z-index: -1;
 }
+
+#go_home_button {
+	position:absolute;
+	font-size:150%;
+	color:#ffffff;
+	background:#3366ff;
+	left:80%;
+	padding:10px;
+}

@@ -3,6 +3,8 @@
 
 function UAV(initialPoint){
 
+	this.currentOpacity = 1;
+
 	//Basic Info
 	this.latitude = initialPoint.lat;
 	this.longitude = initialPoint.lng;
@@ -22,14 +24,6 @@ function UAV(initialPoint){
 	this.waypointList = new Array();
 	this.currentWaypoint = new L.LatLng(37.3868, -122.0678);
 
-	this.uavIcon = L.icon({
-	    iconUrl: './images/drone-tiny.png',
-
-	    iconSize:     [75, 50], // size of the icon
-	    iconAnchor:   [37, 25], // point of the icon which will correspond to marker's location
-	    shadowAnchor: [4, 62],  // the same for the shadow
-	    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-	});
 }
 
 //Assigns marker to the UAV object
@@ -53,6 +47,14 @@ popupOpened = false;
 
  
 UAV.prototype.update = function(){
+	if (Math.abs(this.latitude - this.finalPoint.lat) < 0.005 && Math.abs(this.longitude - this.finalPoint.lng) < 0.005){
+		this.leafletMarker.setOpacity(this.currentOpacity);
+		this.currentOpacity = this.currentOpacity - 0.1;
+		if (this.currentOpacity == 0){
+			return;
+		}
+	}
+
 	desiredLatitude = this.currentWaypoint.lat; //desired waypoint latlong
 	desiredLongitude = this.currentWaypoint.lng;
 	//Calculate new latitude or other stuff as you want
@@ -66,16 +68,17 @@ UAV.prototype.update = function(){
 		if (this.heading >360*Math.PI/180)
 		{this.heading = this.heading -360*Math.PI/180;}
 	if (desiredHeading > this.heading)
-		{this.heading+=.02;}
+		{this.heading+=.04;}
 	else if(desiredHeading < this.heading)
-		{this.heading-=.02;}
+		{this.heading-=.04;}
 
 
 			
 	//this.heading = desiredHeading;
 	// New position function of old position, heading and velocity
-	this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
-	this.longitude = this.longitude + this.velocity/100000*Math.cos(this.heading);
+	this.latitude = this.latitude + this.velocity/80000*Math.sin(this.heading);
+	this.longitude = this.longitude + this.velocity/80000*Math.cos(this.heading);
+
 	//Create a new LatLng variable used by Leaflet
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
