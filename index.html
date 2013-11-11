@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet Quick Start Guide Example</title>
+	<title>Sentient Wings Demo</title>
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,14 @@
 </head>
 
 <body>
-	<button onclick="goHomeFunction()">Click to Go home</button>
+	<div class="button_wrapper">
+		<div class = "active_button" id="go_home_button" onclick="goHome()">Launch</div>
+		<div class = "active_button" id="launch_button" onclick="launch()">Go home</div>
+		<div class = "active_button" id="red_button" onclick="selectRed()">Select Red</div>
+		<div class = "active_button" id="white_button" onclick="selectWhite()">Select White</div>
+		<div class = "active_button" id="blue_button" onclick="selectBlue()">Select Blue</div>
+		<div class = "active_button" id="all_button" onclick="selectAll()">Select All</div>
+	</div>
 	<div id="map" ></div>
 	<script type="text/javascript">
   	initialize();

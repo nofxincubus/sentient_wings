@@ -1,7 +1,10 @@
 // JavaScript Document
 
 
-function UAV(initialPoint){
+function UAV(initialPoint, map){
+
+	this.currentOpacity = 1;
+	this.map = map;
 
 	//Basic Info
 	this.latitude = initialPoint.lat;
@@ -22,14 +25,6 @@ function UAV(initialPoint){
 	this.waypointList = new Array();
 	this.currentWaypoint = new L.LatLng(37.3868, -122.0678);
 
-	this.uavIcon = L.icon({
-	    iconUrl: './images/drone-tiny.png',
-
-	    iconSize:     [75, 50], // size of the icon
-	    iconAnchor:   [37, 25], // point of the icon which will correspond to marker's location
-	    shadowAnchor: [4, 62],  // the same for the shadow
-	    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-	});
 }
 
 //Assigns marker to the UAV object
@@ -53,6 +48,18 @@ popupOpened = false;
 
  
 UAV.prototype.update = function(){
+	/*
+	if (Math.abs(this.latitude - this.finalPoint.lat) < 0.005 && Math.abs(this.longitude - this.finalPoint.lng) < 0.005){
+		this.leafletMarker.setOpacity(this.currentOpacity);
+		this.currentOpacity = this.currentOpacity - 0.1;
+		if (this.currentOpacity == 0){
+			return;
+		}
+	} else {
+		this.currentOpacity = 1;
+	}
+	*/
+
 	desiredLatitude = this.currentWaypoint.lat; //desired waypoint latlong
 	desiredLongitude = this.currentWaypoint.lng;
 	//Calculate new latitude or other stuff as you want
@@ -66,16 +73,17 @@ UAV.prototype.update = function(){
 		if (this.heading >360*Math.PI/180)
 		{this.heading = this.heading -360*Math.PI/180;}
 	if (desiredHeading > this.heading)
-		{this.heading+=.02;}
+		{this.heading+=.04;}
 	else if(desiredHeading < this.heading)
-		{this.heading-=.02;}
+		{this.heading-=.04;}
 
 
 			
 	//this.heading = desiredHeading;
 	// New position function of old position, heading and velocity
-	this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
-	this.longitude = this.longitude + this.velocity/100000*Math.cos(this.heading);
+	this.latitude = this.latitude + this.velocity/80000*Math.sin(this.heading);
+	this.longitude = this.longitude + this.velocity/80000*Math.cos(this.heading);
+
 	//Create a new LatLng variable used by Leaflet
 	var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
@@ -85,18 +93,6 @@ UAV.prototype.update = function(){
 	
 	//Update the position of the marker with the newLatLon variable you have just created
 	this.leafletMarker.setLatLng( newLatLon);
-	//this.leafletMarker.setRotate(this.velocity);
-	/*
-	if (!popupOpened){
-		this.popup = L.popup()
-    	.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude + "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + y + "<br /> x " + x);
-		this.leafletMarker.bindPopup(this.popup).openPopup();
-		popupOpened = true;
-	} else {
-		this.popup.setContent("heading " + this.heading + "<br />desHed " + desiredHeading + "<br />lat " + this.latitude +  "<br />desLat " + desiredLatitude +"<br /> deslong " + desiredLongitude +"<br /> y " + "<br /> y " + y + "<br /> x " + x);
-	}
-	*/
-	
 }
 
 UAV.prototype.setWaypoint = function(waypoint){
@@ -105,6 +101,10 @@ UAV.prototype.setWaypoint = function(waypoint){
 
 UAV.prototype.goToFinal = function(){
 	this.currentWaypoint = this.finalPoint;
+}
+
+UAV.prototype.launch = function(){
+
 }
 
 
