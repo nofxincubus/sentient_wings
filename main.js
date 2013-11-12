@@ -80,18 +80,21 @@ function initialize(){
 
 	map.on('click', onMapClick);
 
-	var initialUavPoint = new L.LatLng(37.468864,-122.204361);
-
 	for (i = 0;i < 3;i ++){
-		blueUavs[i] = new UAV(initialUavPoint, map);
-	}
+		if (i == 0){
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
+		} else if (i == 1){
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
 
-	for (i = 0;i < 3;i ++){
-		redUavs[i] = new UAV(initialUavPoint, map);
-	}
-
-	for (i = 0;i < 3;i ++){
-		whiteUavs[i] = new UAV(initialUavPoint, map);
+		} else if (i == 2){
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
+		}
 	}
 
 	L.marker(new L.LatLng(37.468864,-122.204361),{icon: greenIcon, zIndexOffset:-100}).addTo(map);
@@ -103,9 +106,21 @@ function initialize(){
 	*/
 
 	for (i = 0;i < 3;i ++){
-		blueUavs[i].setLeafletMarker(L.marker(initialUavPoint, {icon: uavIconBlue,iconAngle: 0, zIndexOffset:100}).addTo(map));
-		redUavs[i].setLeafletMarker(L.marker(initialUavPoint, {icon: uavIconRed,iconAngle: 0, zIndexOffset:100}).addTo(map));
-		whiteUavs[i].setLeafletMarker(L.marker(initialUavPoint, {icon: uavIconWhite,iconAngle: 0, zIndexOffset:100}).addTo(map));
+		if (i == 0){
+			blueUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 + 0.01,-122.204361), {icon: uavIconBlue,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			redUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 + 0.01,-122.204361), {icon: uavIconRed,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			whiteUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 + 0.01,-122.204361), {icon: uavIconWhite,iconAngle: 0, zIndexOffset:100}).addTo(map));
+		} else if (i == 1){
+			blueUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), {icon: uavIconBlue,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			redUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), {icon: uavIconRed,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			whiteUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), {icon: uavIconWhite,iconAngle: 0, zIndexOffset:100}).addTo(map));
+
+		} else if (i == 2){
+			blueUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), {icon: uavIconBlue,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			redUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), {icon: uavIconRed,iconAngle: 0, zIndexOffset:100}).addTo(map));
+			whiteUavs[i].setLeafletMarker(L.marker(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), {icon: uavIconWhite,iconAngle: 0, zIndexOffset:100}).addTo(map));
+		}
+		
 	}
 
 	onEF();
@@ -116,55 +131,48 @@ function onMapClick(e){
 	 if (allSelected){
 		for (i = 0;i < 3;i ++){
 			if (i == 0){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
-			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng - 0.0001));
-			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng + 0.0001));
-			}
-			if (i == 0){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
 				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
 			} else if (i == 1){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - 0.0001));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng - 0.01));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - 0.01));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng - 0.01));
 			} else if (i == 2){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + 0.0001));
-			}
-			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng));
-			} else if (i == 1){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng - 0.0001));
-			} else if (i == 2){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng + 0.0001));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng + 0.01));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + 0.01));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng + 0.01));
 			}
 		}
+		return;
 	 } else if (blueSelected){
 	 	for (i = 0;i < 3;i ++){
 	 		if (i == 0){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
 			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
 			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
 	 } else if (redSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
 			} else if (i == 1){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
 			} else if (i == 2){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
 	 } else if (whiteSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
 			} else if (i == 1){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
 			} else if (i == 2){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
 	 }

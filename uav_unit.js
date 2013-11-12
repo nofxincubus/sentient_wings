@@ -25,7 +25,7 @@ function UAV(initialPoint, map){
 	this.fuelLevel = 0;
 
 	this.waypointList = new Array();
-	this.currentWaypoint = new L.LatLng(37.3868, -122.0678);
+	this.currentWaypoint = initialPoint;
 
 }
 
