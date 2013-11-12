@@ -115,21 +115,57 @@ function onMapClick(e){
 	 var newWP = e.latlng;
 	 if (allSelected){
 		for (i = 0;i < 3;i ++){
-			blueUavs[i].setWaypoint(newWP);
-			whiteUavs[i].setWaypoint(newWP);
-			redUavs[i].setWaypoint(newWP);
+			if (i == 0){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+			} else if (i == 1){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng - 0.0001));
+			} else if (i == 2){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng + 0.0001));
+			}
+			if (i == 0){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+			} else if (i == 1){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - 0.0001));
+			} else if (i == 2){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + 0.0001));
+			}
+			if (i == 0){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng));
+			} else if (i == 1){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng - 0.0001));
+			} else if (i == 2){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.0001,newWP.lng + 0.0001));
+			}
 		}
 	 } else if (blueSelected){
 	 	for (i = 0;i < 3;i ++){
-			blueUavs[i].setWaypoint(newWP);
+	 		if (i == 0){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+			} else if (i == 1){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+			} else if (i == 2){
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+			}
 		}
 	 } else if (redSelected){
 	 	for (i = 0;i < 3;i ++){
-			redUavs[i].setWaypoint(newWP);
+			if (i == 0){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+			} else if (i == 1){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+			} else if (i == 2){
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+			}
 		}
 	 } else if (whiteSelected){
 	 	for (i = 0;i < 3;i ++){
-			whiteUavs[i].setWaypoint(newWP);
+			if (i == 0){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.0001,newWP.lng));
+			} else if (i == 1){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng - 0.00005));
+			} else if (i == 2){
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.00005,newWP.lng + 0.00005));
+			}
 		}
 	 }
 }
