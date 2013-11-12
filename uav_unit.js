@@ -70,25 +70,36 @@ UAV.prototype.update = function(){
 	var x = desiredLongitude-this.longitude;
 	 // maps it to +180 -> -180
      var desiredHeading = Math.atan2(y,x);
-        if (this.heading <0)
-                {this.heading = this.heading +360;}
+
+        if (this.heading < -180*Math.PI/180)
+            {this.heading = this.heading +360*Math.PI/180;}
+        else if (this.heading > 180*Math.PI/180)
+            {this.heading = this.heading -360*Math.PI/180;}
+
+
         if (desiredHeading > this.heading)
-                {this.heading+=.01;}
+                {this.heading+=.3;}
         else if(desiredHeading < this.heading)
-                {this.heading-=.01;}
+                {this.heading-=.3;}
+
+
+
                         
         //this.heading = desiredHeading;
         // New position function of old position, heading and velocity
-        this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
-        this.longitude = this.longitude + this.velocity/100000*Math.cos(this.heading);
+        this.latitude = this.latitude + this.velocity/10000*Math.sin(this.heading);
+        this.longitude = this.longitude + this.velocity/10000*Math.cos(this.heading);
+
         //Create a new LatLng variable used by Leaflet
         var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
+
+        //Rotate the uav
+        this.leafletMarker.setIconAngle(-this.heading*180/Math.PI);
+        
         //Update the position of the marker with the newLatLon variable you have just created
         this.leafletMarker.setLatLng( newLatLon);
 	
-	//Update the position of the marker with the newLatLon variable you have just created
-	this.leafletMarker.setLatLng( newLatLon);
 }
 
 UAV.prototype.setWaypoint = function(waypoint){
