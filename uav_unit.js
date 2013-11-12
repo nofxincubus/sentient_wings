@@ -68,31 +68,24 @@ UAV.prototype.update = function(){
 	//Calculate new latitude or other stuff as you want
 	var y = desiredLatitude-this.latitude;
 	var x = desiredLongitude-this.longitude;
-	// maps it to +180 -> -180
-	var desiredHeading = Math.atan2(y,x);
+	 // maps it to +180 -> -180
+     var desiredHeading = Math.atan2(y,x);
+        if (this.heading <0)
+                {this.heading = this.heading +360;}
+        if (desiredHeading > this.heading)
+                {this.heading+=.01;}
+        else if(desiredHeading < this.heading)
+                {this.heading-=.01;}
+                        
+        //this.heading = desiredHeading;
+        // New position function of old position, heading and velocity
+        this.latitude = this.latitude + this.velocity/100000*Math.sin(this.heading);
+        this.longitude = this.longitude + this.velocity/100000*Math.cos(this.heading);
+        //Create a new LatLng variable used by Leaflet
+        var newLatLon = new L.LatLng(this.latitude, this.longitude);
 
-	if (this.heading <0*Math.PI/180)
-		{this.heading = this.heading +360*Math.PI/180;}
-		if (this.heading >360*Math.PI/180)
-		{this.heading = this.heading -360*Math.PI/180;}
-	if (desiredHeading > this.heading)
-		{this.heading+=.04;}
-	else if(desiredHeading < this.heading)
-		{this.heading-=.04;}
-
-
-			
-	//this.heading = desiredHeading;
-	// New position function of old position, heading and velocity
-	this.latitude = this.latitude + this.velocity/80000*Math.sin(this.heading);
-	this.longitude = this.longitude + this.velocity/80000*Math.cos(this.heading);
-
-	//Create a new LatLng variable used by Leaflet
-	var newLatLon = new L.LatLng(this.latitude, this.longitude);
-
-
-	//Rotate the uav
-	this.leafletMarker.setIconAngle(-this.heading*180/Math.PI);
+        //Update the position of the marker with the newLatLon variable you have just created
+        this.leafletMarker.setLatLng( newLatLon);
 	
 	//Update the position of the marker with the newLatLon variable you have just created
 	this.leafletMarker.setLatLng( newLatLon);
