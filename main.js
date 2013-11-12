@@ -144,6 +144,7 @@ function onMapClick(e){
 				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng + 0.01));
 			}
 		}
+		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
 		return;
 	 } else if (blueSelected){
 	 	for (i = 0;i < 3;i ++){
@@ -155,6 +156,8 @@ function onMapClick(e){
 				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
+		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		return;
 	 } else if (redSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
@@ -165,6 +168,8 @@ function onMapClick(e){
 				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
+		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		return;
 	 } else if (whiteSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
@@ -175,6 +180,8 @@ function onMapClick(e){
 				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
 			}
 		}
+		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		return;
 	 }
 }
 
