@@ -78,17 +78,17 @@ UAV.prototype.update = function(){
 
 
         if (desiredHeading > this.heading)
-                {this.heading+=.3;}
+                {this.heading+=.04;}
         else if(desiredHeading < this.heading)
-                {this.heading-=.3;}
+                {this.heading-=.04;}
 
 
 
                         
         //this.heading = desiredHeading;
         // New position function of old position, heading and velocity
-        this.latitude = this.latitude + this.velocity/10000*Math.sin(this.heading);
-        this.longitude = this.longitude + this.velocity/10000*Math.cos(this.heading);
+        this.latitude = this.latitude + this.velocity/40000*Math.sin(this.heading);
+        this.longitude = this.longitude + this.velocity/40000*Math.cos(this.heading);
 
         //Create a new LatLng variable used by Leaflet
         var newLatLon = new L.LatLng(this.latitude, this.longitude);
