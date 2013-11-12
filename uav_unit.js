@@ -6,6 +6,8 @@ function UAV(initialPoint, map){
 	this.currentOpacity = 1;
 	this.map = map;
 
+	this.currentOpacity = 1;
+
 	//Basic Info
 	this.latitude = initialPoint.lat;
 	this.longitude = initialPoint.lng;
@@ -59,6 +61,7 @@ UAV.prototype.update = function(){
 		this.currentOpacity = 1;
 	}
 	*/
+	
 
 	desiredLatitude = this.currentWaypoint.lat; //desired waypoint latlong
 	desiredLongitude = this.currentWaypoint.lng;
