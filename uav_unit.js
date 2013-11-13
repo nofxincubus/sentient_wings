@@ -79,11 +79,43 @@ UAV.prototype.update = function(){
     else if (this.heading >= Math.PI){
     	this.heading = this.heading - 2*Math.PI;
     }
-    if (desiredHeading - this.heading < this.heading - desiredHeading){
-    	this.heading-=.04;
-    } else if (desiredHeading - this.heading > this.heading - desiredHeading){
-    	this.heading+=.04;
-    } 
+    if (desiredHeading < 0){
+    	if (this.heading < 0){
+    		if (desiredHeading > this.heading){
+    			this.heading += 0.04;
+    		} else if (desiredHeading < this.heading){
+    			this.heading -= 0.04;
+    		}
+    	} else if (this.heading >= 0){
+    		if (desiredHeading + Math.PI + (Math.Pi + this.heading) < (-1) * desiredHeading + this.heading){
+    			this.heading += 0.04;
+    		} else {
+    			this.heading -= 0.04;
+    		}
+    	} 
+
+    } else if (desiredHeading > 0){
+    	if (this.heading < 0){
+			if (Math.PI - desiredHeading + (this.heading + Math.pi) < desiredHeading + (-1) * this.heading){
+				this.heading -= 0.04;
+			} else {
+				this.heading += 0.04;
+			}
+    	} else if (this.heading > 0){
+    		if (desiredHeading > this.heading){
+    			this.heading += 0.04;
+    		} else if (desiredHeading < this.heading){
+    			this.heading -= 0.04;
+    		}
+    	}
+    } else {
+    	if (this.heading < 0){
+    		this.heading += 0.04;
+    	} else if (this.heading > 0){
+			this.heading -= 0.04;
+    	} 
+    }
+
                         
         //this.heading = desiredHeading;
         // New position function of old position, heading and velocity
