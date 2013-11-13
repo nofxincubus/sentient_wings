@@ -73,12 +73,31 @@ UAV.prototype.update = function(){
 
     var desiredHeading = Math.atan2(y,x);
 
+    var diff = desiredHeading - this.heading;
+
+    if (diff > Math.PI){
+    	diff =- 2*Math.PI;
+    } else if (diff < Math.PI){
+		diff =+ 2*Math.PI;
+    }
+
+    if (diff > 0){
+    	this.heading =+0.04;
+    } else if (diff < 0){
+    	this.heading =-0.04;
+    }
+
+/*
     if (this.heading <= -Math.PI){
     	this.heading = this.heading + 2*Math.PI;
     }
     else if (this.heading >= Math.PI){
     	this.heading = this.heading - 2*Math.PI;
     }
+
+
+
+
     if (desiredHeading < 0){
     	if (this.heading < 0){
     		if (desiredHeading > this.heading){
@@ -115,7 +134,7 @@ UAV.prototype.update = function(){
 			this.heading -= 0.04;
     	} 
     }
-
+*/
                         
         //this.heading = desiredHeading;
         // New position function of old position, heading and velocity
