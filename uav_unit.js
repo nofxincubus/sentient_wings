@@ -73,18 +73,18 @@ UAV.prototype.update = function(){
 
     var desiredHeading = Math.atan2(y,x);
 
-    var diff = desiredHeading - this.heading;
+    var difference = desiredHeading - this.heading;
 
-    if (diff > Math.PI){
-    	diff =- 2*Math.PI;
-    } else if (diff < Math.PI){
-		diff =+ 2*Math.PI;
+    if (difference > Math.PI){
+    	difference -= 2*Math.PI;
+    } else if (difference < -Math.PI){
+		difference += 2*Math.PI;
     }
 
-    if (diff > 0){
-    	this.heading =+0.04;
-    } else if (diff < 0){
-    	this.heading =-0.04;
+    if (difference > 0){
+    	this.heading += 0.04;
+    } else if (difference < 0){
+    	this.heading -= 0.04;
     }
 
 /*
@@ -155,21 +155,21 @@ UAV.prototype.update = function(){
                 this.popup = L.popup()
             .setContent("heading " + this.heading*180/Math.PI 
             	+ "<br />desHed " + desiredHeading*180/Math.PI 
+            	+"<br /> difference " + difference 
             	+ "<br />lat " + this.latitude 
             	+ "<br />lon " + this.longitude 
-            	+"<br /> deslong " + desiredLongitude 
-            	+"<br /> y " + y 
-            	+ "<br /> x " + x);
+            	+"<br /> deslat " + desiredLatitude 
+            	+"<br /> deslng " + desiredLongitude);
                 this.leafletMarker.bindPopup(this.popup).openPopup();
                 popupOpened = true;
         } else {
                 this.popup.setContent("heading " + this.heading*180/Math.PI 
             	+ "<br />desHed " + desiredHeading*180/Math.PI 
+            	+"<br /> difference " + difference 
             	+ "<br />lat " + this.latitude 
             	+ "<br />lon " + this.longitude 
-            	+"<br /> deslong " + desiredLongitude 
-            	+"<br /> y " + y 
-            	+ "<br /> x " + x);
+            	+"<br /> deslat " + desiredLatitude 
+            	+"<br /> deslng " + desiredLongitude);
                 this.leafletMarker.bindPopup(this.popup).openPopup();
         }
 	
