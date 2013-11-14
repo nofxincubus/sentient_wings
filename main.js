@@ -220,23 +220,23 @@ function clickWaypoint(newWP){
 				}
 			}
 			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
-		} else if (buttons[1].isSelected){ 
+		} else if (buttons[1].isSelected()){ 
 			redUavs[0].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
-		} else if (buttons[2].isSelected){
+		} else if (buttons[2].isSelected()){
 			redUavs[1].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
-		} else if (buttons[3].isSelected){
+		} else if (buttons[3].isSelected()){
 			redUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[5].isSelected){
+		} else if (buttons[5].isSelected()){
 			whiteUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[6].isSelected){
+		} else if (buttons[6].isSelected()){
 			whiteUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[7].isSelected){
+		} else if (buttons[7].isSelected()){
 			whiteUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[9].isSelected){
+		} else if (buttons[9].isSelected()){
 			blueUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[10].isSelected){
+		} else if (buttons[10].isSelected()){
 			blueUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
-		} else if (buttons[11].isSelected){
+		} else if (buttons[11].isSelected()){
 			blueUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
 		}
 }
