@@ -86,57 +86,6 @@ UAV.prototype.update = function(){
     } else if (difference < 0){
     	this.heading -= 0.04;
     }
-
-/*
-    if (this.heading <= -Math.PI){
-    	this.heading = this.heading + 2*Math.PI;
-    }
-    else if (this.heading >= Math.PI){
-    	this.heading = this.heading - 2*Math.PI;
-    }
-
-
-
-
-    if (desiredHeading < 0){
-    	if (this.heading < 0){
-    		if (desiredHeading > this.heading){
-    			this.heading += 0.04;
-    		} else if (desiredHeading < this.heading){
-    			this.heading -= 0.04;
-    		}
-    	} else if (this.heading >= 0){
-    		if (desiredHeading + Math.PI + (Math.Pi + this.heading) < (-1) * desiredHeading + this.heading){
-    			this.heading += 0.04;
-    		} else {
-    			this.heading -= 0.04;
-    		}
-    	} 
-
-    } else if (desiredHeading > 0){
-    	if (this.heading < 0){
-			if (Math.PI - desiredHeading + (this.heading + Math.pi) < desiredHeading + (-1) * this.heading){
-				this.heading -= 0.04;
-			} else {
-				this.heading += 0.04;
-			}
-    	} else if (this.heading > 0){
-    		if (desiredHeading > this.heading){
-    			this.heading += 0.04;
-    		} else if (desiredHeading < this.heading){
-    			this.heading -= 0.04;
-    		}
-    	}
-    } else {
-    	if (this.heading < 0){
-    		this.heading += 0.04;
-    	} else if (this.heading > 0){
-			this.heading -= 0.04;
-    	} 
-    }
-*/
-                        
-        //this.heading = desiredHeading;
         // New position function of old position, heading and velocity
         this.latitude = this.latitude + this.velocity/40000*Math.sin(this.heading);
         this.longitude = this.longitude + this.velocity/40000*Math.cos(this.heading);
@@ -151,6 +100,7 @@ UAV.prototype.update = function(){
         //Update the position of the marker with the newLatLon variable you have just created
         this.leafletMarker.setLatLng( newLatLon);
 
+		/* DEBUG CODE
         if (!popupOpened){
                 this.popup = L.popup()
             .setContent("heading " + this.heading*180/Math.PI 
@@ -172,6 +122,7 @@ UAV.prototype.update = function(){
             	+"<br /> deslng " + desiredLongitude);
                 this.leafletMarker.bindPopup(this.popup).openPopup();
         }
+        */
 	
 }
 

@@ -62,6 +62,11 @@ whiteSelected = false;
 redSelected = false;
 allSelected = false;
 
+waypointOffset = 0.035;
+waypointOffset1 = 0.01;
+waypointOffset2 = 0.005;
+waypointOffset3 = 0.009;
+
 function initialize(){
 
 	goHomeButton = document.getElementById("go_home_button");
@@ -82,18 +87,18 @@ function initialize(){
 
 	for (i = 0;i < 3;i ++){
 		if (i == 0){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
-			redUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 + 0.01,-122.204361), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
 		} else if (i == 1){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
-			redUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 - 0.005), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
 
 		} else if (i == 2){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
-			redUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - 0.005,-122.204361 + 0.005), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
+			redUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
 		}
 	}
 
@@ -131,17 +136,17 @@ function onMapClick(e){
 	 if (allSelected){
 		for (i = 0;i < 3;i ++){
 			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng));
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng));
 				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
 			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng - 0.01));
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - 0.01));
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng - 0.01));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng - waypointOffset));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - waypointOffset));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng - waypointOffset));
 			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng + 0.01));
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + 0.01));
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.01,newWP.lng + 0.01));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng + waypointOffset));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + waypointOffset));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng + waypointOffset));
 			}
 		}
 		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
@@ -149,11 +154,11 @@ function onMapClick(e){
 	 } else if (blueSelected){
 	 	for (i = 0;i < 3;i ++){
 	 		if (i == 0){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
 			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
 			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
+				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
 			}
 		}
 		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
@@ -161,11 +166,11 @@ function onMapClick(e){
 	 } else if (redSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
 			} else if (i == 1){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
 			} else if (i == 2){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
+				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
 			}
 		}
 		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
@@ -173,11 +178,11 @@ function onMapClick(e){
 	 } else if (whiteSelected){
 	 	for (i = 0;i < 3;i ++){
 			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + 0.01,newWP.lng));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
 			} else if (i == 1){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng - 0.005));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
 			} else if (i == 2){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - 0.005,newWP.lng + 0.005));
+				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
 			}
 		}
 		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
@@ -249,10 +254,12 @@ function selectAll(){
 		blueSelected = false;
 		redSelected = false;
 		whiteSelected = false;
+		allSelected = false;
 	} else {
 		blueSelected = true;
 		redSelected = true;
 		whiteSelected = true;
+		allSelected = true;
 	}
 	updateButtons();
 }
