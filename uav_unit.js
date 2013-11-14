@@ -1,6 +1,3 @@
-// JavaScript Document
-
-
 function UAV(initialPoint, map){
 
 	this.currentOpacity = 1;

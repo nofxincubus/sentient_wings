@@ -18,19 +18,32 @@
 <script src="./Marker.Rotate.js"></script>
 <script type="text/javascript" src="main.js"></script>
 <script type="text/javascript" src="uav_unit.js"></script>
-
-	
+<script type="text/javascript" src="button.js"></script>
 
 </head>
 
 <body>
 	<div class="button_wrapper">
+		<div class = "active_button" id="all_button" onclick="selectAll()">Select All</div>
+		<div class = "active_button" id="red_button" onclick="selectRed()">Select Red</div>
+		<div class = "active_button" id="red_one_button" onclick="selectRedOne()">Red One</div>
+		<div class = "active_button" id="red_two_button" onclick="selectRedTwo()">Red Two</div>
+		<div class = "active_button" id="red_three_button" onclick="selectRedThree()">Red Three</div>
+		<div class = "active_button" id="white_button" onclick="selectWhite()">Select White</div>
+		<div class = "active_button" id="white_one_button" onclick="selectWhiteOne()">White One</div>
+		<div class = "active_button" id="white_two_button" onclick="selectWhiteTwo()">White Two</div>
+		<div class = "active_button" id="white_three_button" onclick="selectWhiteThree()">White Three</div>
+		<div class = "active_button" id="blue_button" onclick="selectBlue()">Select Blue</div>
+		<div class = "active_button" id="blue_one_button" onclick="selectBlueOne()">Blue One</div>
+		<div class = "active_button" id="blue_two_button" onclick="selectBlueTwo()">Blue Two</div>
+		<div class = "active_button" id="blue_three_button" onclick="selectBlueThree()">Blue Three</div>
+	</div>
+
+	<div class="button_wrapper_two">
 		<div class = "active_button" id="go_home_button" onclick="goHome()">Launch</div>
 		<div class = "active_button" id="launch_button" onclick="launch()">Go home</div>
-		<div class = "active_button" id="red_button" onclick="selectRed()">Select Red</div>
-		<div class = "active_button" id="white_button" onclick="selectWhite()">Select White</div>
-		<div class = "active_button" id="blue_button" onclick="selectBlue()">Select Blue</div>
-		<div class = "active_button" id="all_button" onclick="selectAll()">Select All</div>
+		<div class = "active_button" id="waypoint_button" onclick="waypoint()">Waypoint Mode</div>
+		<div class = "active_button" id="adhoc_button" onclick="adhoc()">Adhoc Network</div>
 	</div>
 	<div id="map" ></div>
 	<script type="text/javascript">

@@ -56,11 +56,12 @@ var  greenIcon = L.icon({
 blueUavs = [];
 redUavs = [];
 whiteUavs = [];
+buttons = [];
 
-blueSelected = false;
-whiteSelected = false;
-redSelected = false;
-allSelected = false;
+// 0 = adhoc
+// 1 = waypoint
+// 2 = line
+mode = 0;
 
 waypointOffset = 0.035;
 waypointOffset1 = 0.01;
@@ -69,12 +70,31 @@ waypointOffset3 = 0.009;
 
 function initialize(){
 
-	goHomeButton = document.getElementById("go_home_button");
-	launchButton = document.getElementById("launch_button");
-	redButton = document.getElementById("red_button");
-	whiteButton = document.getElementById("white_button");
-	blueButton = document.getElementById("blue_button");
-	allButton = document.getElementById("all_button");
+	//Button initialization
+
+	buttons[0] = new SelectableButton(document.getElementById("red_button"));
+	buttons[1] = new SelectableButton(document.getElementById("red_one_button"));
+	buttons[2] = new SelectableButton(document.getElementById("red_two_button"));
+	buttons[3] = new SelectableButton(document.getElementById("red_three_button"));
+	buttons[4] = new SelectableButton(document.getElementById("white_button"));
+	buttons[5] = new SelectableButton(document.getElementById("white_one_button"));
+	buttons[6] = new SelectableButton(document.getElementById("white_two_button"));
+	buttons[7] = new SelectableButton(document.getElementById("white_three_button"));
+	buttons[8] = new SelectableButton(document.getElementById("blue_button"));
+	buttons[9] = new SelectableButton(document.getElementById("blue_one_button"));
+	buttons[10] = new SelectableButton(document.getElementById("blue_two_button"));
+	buttons[11] = new SelectableButton(document.getElementById("blue_three_button"));
+	buttons[12] = new SelectableButton(document.getElementById("all_button"));
+
+	goHomeButton = new SelectableButton(document.getElementById("go_home_button"));
+	launchButton = new SelectableButton(document.getElementById("launch_button"));
+	adhocButton = new SelectableButton(document.getElementById("adhoc_button"));
+	adhocButton.setSelect();
+	waypointButton = new SelectableButton(document.getElementById("waypoint_button"));
+	//lineButton = new SelectableButton(document.getElementById("line_button"));
+	
+	
+
 
 	map = L.map("map").setView([37.468864,-122.204361], 13);
 
@@ -131,63 +151,169 @@ function initialize(){
 	onEF();
 }
 
+function selectAll(){
+	for (j = 0;j < 13;j++){
+		buttons[j].setSelect();
+	}
+}
+
+function deselectAll(){
+	for (x = 0;x < 13;x++){
+		buttons[x].deselect();
+	}
+}
+
+function clickWaypoint(newWP){
+	if (buttons[12].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+				} else if (i == 1){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng ));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat, newWP.lng ));
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat, newWP.lng ));
+				} else if (i == 2){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng ));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat, newWP.lng ));
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng ));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		}
+		//red 
+		else if (buttons[0].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
+				} else if (i == 1){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng ));
+				} else if (i == 2){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng ));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		}
+		//white 
+		else if (buttons[4].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+				} else if (i == 1){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+				} else if (i == 2){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		} 
+		//blue
+		else if (buttons[8].isSelected()){
+			for (i = 0;i < 3;i ++){
+		 		if (i == 0){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
+				} else if (i == 1){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
+				} else if (i == 2){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		} else if (buttons[1].isSelected){ 
+			redUavs[0].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+		} else if (buttons[2].isSelected){
+			redUavs[1].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+		} else if (buttons[3].isSelected){
+			redUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[5].isSelected){
+			whiteUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[6].isSelected){
+			whiteUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[7].isSelected){
+			whiteUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[9].isSelected){
+			blueUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[10].isSelected){
+			blueUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[11].isSelected){
+			blueUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		}
+}
+
+function clickAdhoc(newWP){
+	if (buttons[12].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng));
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+				} else if (i == 1){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng - waypointOffset));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - waypointOffset));
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng - waypointOffset));
+				} else if (i == 2){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng + waypointOffset));
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + waypointOffset));
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng + waypointOffset));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		}
+		//red 
+		else if (buttons[0].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
+				} else if (i == 1){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
+				} else if (i == 2){
+					redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		}
+		//white 
+		else if (buttons[4].isSelected()){
+			for (i = 0;i < 3;i ++){
+				if (i == 0){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
+				} else if (i == 1){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
+				} else if (i == 2){
+					whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		} 
+		//blue
+		else if (buttons[8].isSelected()){
+			for (i = 0;i < 3;i ++){
+		 		if (i == 0){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
+				} else if (i == 1){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
+				} else if (i == 2){
+					blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
+				}
+			}
+			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		}
+}
+
+
 function onMapClick(e){
-	 var newWP = e.latlng;
-	 if (allSelected){
-		for (i = 0;i < 3;i ++){
-			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng));
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng));
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
-			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng - waypointOffset));
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng - waypointOffset));
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng - waypointOffset));
-			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset,newWP.lng + waypointOffset));
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat,newWP.lng + waypointOffset));
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset,newWP.lng + waypointOffset));
-			}
-		}
-		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
-		return;
-	 } else if (blueSelected){
-	 	for (i = 0;i < 3;i ++){
-	 		if (i == 0){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
-			} else if (i == 1){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
-			} else if (i == 2){
-				blueUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
-			}
-		}
-		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
-		return;
-	 } else if (redSelected){
-	 	for (i = 0;i < 3;i ++){
-			if (i == 0){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
-			} else if (i == 1){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
-			} else if (i == 2){
-				redUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
-			}
-		}
-		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
-		return;
-	 } else if (whiteSelected){
-	 	for (i = 0;i < 3;i ++){
-			if (i == 0){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat + waypointOffset1,newWP.lng));
-			} else if (i == 1){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng - waypointOffset3));
-			} else if (i == 2){
-				whiteUavs[i].setWaypoint(new L.LatLng(newWP.lat - waypointOffset2,newWP.lng + waypointOffset3));
-			}
-		}
-		L.marker(newWP,{zIndexOffset:-100}).addTo(map);
-		return;
-	 }
+	var newWP = e.latlng;
+	//Adhoc mode
+	if (mode == 0){
+		clickAdhoc(newWP);
+	} 
+	//Waypoint mode
+	else if (mode == 1){
+		clickWaypoint(newWP);
+	} else if (mode == 2){
+		//Nothing for now
+	}
 }
 
 function onEF()
@@ -216,85 +342,93 @@ function goHome(){
 	}
 }
 
+function adhoc(){
+	unmode();
+	adhocButton.setSelect();
+	mode = 0;
+}
+
+function waypoint(){
+	unmode();
+	waypointButton.setSelect();
+	mode = 1;
+}
+
+function line(){
+	unmode();
+	waypointButton.setSelect();
+	mode = 2;
+}
+
 function selectBlue(){
-	if (blueSelected){
-		blueSelected = false;
-	} else {
-		blueSelected = true;
-		redSelected = false;
-		whiteSelected = false;
+	deselectAll();
+	for (i = 8;i <= 11;i ++){
+		buttons[i].setSelect();
 	}
-	updateButtons();
+}
+
+function selectBlueOne(){
+	deselectAll();
+	buttons[9].setSelect();
+}
+
+function selectBlueTwo(){
+	deselectAll();
+	buttons[10].setSelect();
+}
+
+function selectBlueThree(){
+	deselectAll();
+	buttons[11].setSelect();
 }
 
 function selectRed(){
-	if (redSelected){
-		redSelected = false;
-	} else {
-		blueSelected = false;
-		redSelected = true;
-		whiteSelected = false;
+	deselectAll();
+	for (i = 0;i <= 3;i ++){
+		buttons[i].setSelect();
 	}
-	updateButtons();
+}
+
+function selectRedOne(){
+	deselectAll();
+	buttons[1].setSelect();
+}
+
+function selectRedTwo(){
+	deselectAll();
+	buttons[2].setSelect();
+}
+
+function selectRedThree(){
+	deselectAll();
+	buttons[3].setSelect();
 }
 
 function selectWhite(){
-	if (whiteSelected){
-		whiteSelected = false;
-	} else {
-		blueSelected = false;
-		redSelected = false;
-		whiteSelected = true;
-	}
-	updateButtons();
-}
-
-function selectAll(){
-	if (blueSelected && redSelected && whiteSelected){
-		blueSelected = false;
-		redSelected = false;
-		whiteSelected = false;
-		allSelected = false;
-	} else {
-		blueSelected = true;
-		redSelected = true;
-		whiteSelected = true;
-		allSelected = true;
-	}
-	updateButtons();
-}
-
-function updateButtons(){
-	if (blueSelected && redSelected && whiteSelected){
-		allButton.style.background="#666666";
-		blueButton.style.background="#666666";
-		redButton.style.background="#666666";
-		whiteButton.style.background="#666666";
-		return;
-	} else {
-		allButton.style.background="#000000";
-		blueButton.style.background="#000000";
-		redButton.style.background="#000000";
-		whiteButton.style.background="#000000";
-	}
-
-	if (blueSelected){
-		blueButton.style.background="#666666";
-	} else {
-		blueButton.style.background="#000000";
-	}
-
-	if (redSelected){
-		redButton.style.background="#666666";
-	} else {
-		redButton.style.background="#000000";
-	}
-
-	if (whiteSelected){
-		whiteButton.style.background="#666666";
-	} else {
-		whiteButton.style.background="#000000";
+	deselectAll();
+	for (i = 4;i <= 7;i ++){
+		buttons[i].setSelect();
 	}
 }
+function selectWhiteOne(){
+	deselectAll();
+	buttons[5].setSelect();
+}
+
+function selectWhiteTwo(){
+	deselectAll();
+	buttons[6].setSelect();
+}
+
+function selectWhiteThree(){
+	deselectAll();
+	buttons[7].setSelect();
+}
+
+function unmode(){
+	adhocButton.deselect();
+	waypointButton.deselect();
+}
+
 
 
