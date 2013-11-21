@@ -17,32 +17,157 @@ function el(s)
 	return document.getElementById(s);
 }
 
-var uavIconRed = L.icon({
-	    iconUrl: './images/drone-tiny-red.png',
+var uavIconRedSmallest = L.icon({
+	    iconUrl: './images/drone-tiny-red-footprint-11.png',
 
-	    iconSize:     [50, 20], // size of the icon
-	    iconAnchor:   [25, 10], // point of the icon which will correspond to marker's location
-	    shadowAnchor: [25, 10],  // the same for the shadow
+	    iconSize:     [100, 110], 
+	    iconAnchor:   [50, 50], 
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconWhiteSmallest = L.icon({
+	    iconUrl: './images/drone-tiny-white-footprint-11.png',
+
+	    iconSize:     [100, 110], 
+	    iconAnchor:   [50, 50], 
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconBlueSmallest = L.icon({
+	    iconUrl: './images/drone-tiny-blue-footprint-11.png',
+
+	    iconSize:     [100, 110], 
+	    iconAnchor:   [50, 50], 
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconRedSmall = L.icon({
+	    iconUrl: './images/drone-tiny-red-footprint-12.png',
+
+	    iconSize:     [160, 160], 
+	    iconAnchor:   [80, 80], 
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconWhiteSmall = L.icon({
+	    iconUrl: './images/drone-tiny-white-footprint-12.png',
+
+	    iconSize:     [160, 160], 
+	    iconAnchor:   [80, 80],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconBlueSmall = L.icon({
+	    iconUrl: './images/drone-tiny-blue-footprint-12.png',
+
+	    iconSize:     [160, 160], 
+	    iconAnchor:   [80, 80],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconRed = L.icon({
+	    iconUrl: './images/drone-tiny-red-footprint.png',
+
+	    iconSize:     [297, 297], // size of the icon
+	    iconAnchor:   [148, 148], // point of the icon which will correspond to marker's location
 	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
 	});
 
 var uavIconWhite = L.icon({
-	    iconUrl: './images/drone-tiny-white.png',
+	    iconUrl: './images/drone-tiny-white-footprint.png',
 
-	    iconSize:     [50, 20], // size of the icon
-	    iconAnchor:   [25, 10], // point of the icon which will correspond to marker's location
-	    shadowAnchor: [25, 10],  // the same for the shadow
+	    iconSize:     [297, 297], // size of the icon
+	    iconAnchor:   [148, 148], // point of the icon which will correspond to marker's location
 	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
 	});
 
 var uavIconBlue = L.icon({
-	    iconUrl: './images/drone-tiny-blue.png',
+	    iconUrl: './images/drone-tiny-blue-footprint.png',
 
-	    iconSize:     [50, 20], // size of the icon
-	    iconAnchor:   [25, 10], // point of the icon which will correspond to marker's location
-	    shadowAnchor: [25, 10],  // the same for the shadow
+	    iconSize:     [297, 297], // size of the icon
+	    iconAnchor:   [148, 148], // point of the icon which will correspond to marker's location
 	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
 	});
+
+var uavIconRedWP = L.icon({
+	    iconUrl: './images/drone-tiny-red.png',
+
+	    iconSize:     [50, 20],
+	    iconAnchor:   [25, 10],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconWhiteWP = L.icon({
+	    iconUrl: './images/drone-tiny-white.png',
+
+	    iconSize:     [50, 20],
+	    iconAnchor:   [25, 10],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconBlueWP = L.icon({
+	    iconUrl: './images/drone-tiny-blue.png',
+
+	    iconSize:     [50, 20],
+	    iconAnchor:   [25, 10],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+
+
+
+var uavIconRedSmallestWP = L.icon({
+	    iconUrl: './images/drone-tiny-red-footprint-11-WP.png',
+
+	    iconSize:     [21, 11], 
+	    iconAnchor:   [10, 5],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconWhiteSmallestWP = L.icon({
+	    iconUrl: './images/drone-tiny-white-footprint-11-WP.png',
+
+	    iconSize:     [21, 11], 
+	    iconAnchor:   [10, 5],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconBlueSmallestWP = L.icon({
+	    iconUrl: './images/drone-tiny-blue-footprint-11-WP.png',
+
+	    iconSize:     [21, 11], 
+	    iconAnchor:   [10, 5], 
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconRedSmallWP = L.icon({
+	    iconUrl: './images/drone-tiny-red-footprint-12-WP.png',
+
+	    iconSize:     [31, 15], 
+	    iconAnchor:   [15, 7],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconWhiteSmallWP = L.icon({
+	    iconUrl: './images/drone-tiny-white-footprint-12-WP.png',
+
+	    iconSize:     [31, 15], 
+	    iconAnchor:   [15, 7],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+var uavIconBlueSmallWP = L.icon({
+	    iconUrl: './images/drone-tiny-blue-footprint-12-WP.png',
+
+	    iconSize:     [31, 15], 
+	    iconAnchor:   [15, 7],
+	    popupAnchor:  [25, 10] // point from which the popup should open relative to the iconAnchor
+	});
+
+
+
+
+
 
 var  greenIcon = L.icon({
     iconUrl: './images/home.png',
@@ -64,9 +189,9 @@ buttons = [];
 mode = 0;
 
 waypointOffset = 0.035;
-waypointOffset1 = 0.01;
-waypointOffset2 = 0.005;
-waypointOffset3 = 0.009;
+waypointOffset1 = 0.02;
+waypointOffset2 = 0.02;
+waypointOffset3 = 0.02;
 
 function initialize(){
 
@@ -96,8 +221,9 @@ function initialize(){
 	
 
 
-	map = L.map("map").setView([37.468864,-122.204361], 13);
-
+	map = L.map("map").setView([37.468864,-122.204361], 13, minZoom = 12, maxZoom = 13);
+	map.maxZoom = 13;
+	map.minZoom = 12;
 	L.tileLayer('http://{s}.tile.cloudmade.com/9e8f098a2ebf41158e0423a8b807ec95/997/256/{z}/{x}/{y}.png', {
 			maxZoom: 18,
 			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
@@ -107,20 +233,31 @@ function initialize(){
 
 	for (i = 0;i < 3;i ++){
 		if (i == 0){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
-			redUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 + waypointOffset1,-122.204361), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.458864 + waypointOffset1,-122.204361), map);
+			redUavs[i] = new UAV(new L.LatLng(37.438864 + waypointOffset1,-122.204361), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.418864 + waypointOffset1,-122.204361), map);
 		} else if (i == 1){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.478864 - waypointOffset2,-122.204361 - waypointOffset3), map);
 			redUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 - waypointOffset3), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.498864 - waypointOffset2,-122.204361 - waypointOffset3), map);
 
 		} else if (i == 2){
-			blueUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
-			redUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
-			whiteUavs[i] = new UAV(new L.LatLng(37.468864 - waypointOffset2,-122.204361 + waypointOffset3), map);
+			blueUavs[i] = new UAV(new L.LatLng(37.45164 - waypointOffset2,-122.204361 + waypointOffset3), map);
+			redUavs[i] = new UAV(new L.LatLng(37.435864 - waypointOffset2,-122.204361 + waypointOffset3), map);
+			whiteUavs[i] = new UAV(new L.LatLng(37.425864 - waypointOffset2,-122.204361 + waypointOffset3), map);
 		}
 	}
+
+	map.on('viewreset', function(){
+		if (map.getZoom() == 13){
+			onZoom13();
+		} else if (map.getZoom() == 12){
+			onZoom14();
+		} else if (map.getZoom() == 11){
+			onZoom11();
+		}
+	});
+
 
 	L.marker(new L.LatLng(37.468864,-122.204361),{icon: greenIcon, zIndexOffset:-100}).addTo(map);
 
@@ -298,7 +435,77 @@ function clickAdhoc(newWP){
 				}
 			}
 			L.marker(newWP,{zIndexOffset:-100}).addTo(map);
+		} else if (buttons[1].isSelected()){ 
+			redUavs[0].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+		} else if (buttons[2].isSelected()){
+			redUavs[1].setWaypoint(new L.LatLng(newWP.lat,newWP.lng));
+		} else if (buttons[3].isSelected()){
+			redUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[5].isSelected()){
+			whiteUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[6].isSelected()){
+			whiteUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[7].isSelected()){
+			whiteUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[9].isSelected()){
+			blueUavs[0].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[10].isSelected()){
+			blueUavs[1].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
+		} else if (buttons[11].isSelected()){
+			blueUavs[2].setWaypoint(new L.LatLng(newWP.lat ,newWP.lng));
 		}
+}
+
+function onZoom14(){
+	if (mode == 0){
+		for (var i = 0;i < 3;i++){
+			redUavs[i].setIcon(uavIconRedSmall);
+			whiteUavs[i].setIcon(uavIconWhiteSmall);
+			blueUavs[i].setIcon(uavIconBlueSmall);
+		}
+	} else if (mode == 1){
+		for (var i = 0;i < 3;i++){
+			redUavs[i].setIcon(uavIconRedSmallWP);
+			whiteUavs[i].setIcon(uavIconWhiteSmallWP);
+			blueUavs[i].setIcon(uavIconBlueSmallWP);
+		}
+	}
+}
+
+function onZoom13(){
+	if (mode == 0) {
+		for (var i = 0;i < 3;i++){
+			redUavs[i].setIcon(uavIconRed);
+			whiteUavs[i].setIcon(uavIconWhite);
+			blueUavs[i].setIcon(uavIconBlue);
+		}
+	} else if (mode == 1){
+		wpModeIcon();
+	}
+}
+
+function onZoom11(){
+	if (mode == 0){
+	for (var i = 0;i < 3;i++){
+		redUavs[i].setIcon(uavIconRedSmallest);
+		whiteUavs[i].setIcon(uavIconWhiteSmallest);
+		blueUavs[i].setIcon(uavIconBlueSmallest);
+	}
+	} else if (mode == 1){
+		for (var i = 0;i < 3;i++){
+			redUavs[i].setIcon(uavIconRedSmallestWP);
+			whiteUavs[i].setIcon(uavIconWhiteSmallestWP);
+			blueUavs[i].setIcon(uavIconBlueSmallestWP);
+		}
+	}
+}
+
+function wpModeIcon(){
+	for (var i = 0;i < 3;i++){
+		redUavs[i].setIcon(uavIconRedWP);
+		whiteUavs[i].setIcon(uavIconWhiteWP);
+		blueUavs[i].setIcon(uavIconBlueWP);
+	}
 }
 
 
@@ -346,12 +553,34 @@ function adhoc(){
 	unmode();
 	adhocButton.setSelect();
 	mode = 0;
+	if (map.getZoom() == 13){
+		onZoom13();
+	} else if (map.getZoom() == 12){
+		onZoom14();
+	} else if (map.getZoom() == 11){
+		onZoom11();
+	} else if (map.getZoom() < 11){
+		onZoom11();
+	} else if (map.getZoom() > 13){
+		onZoom13();
+	}
 }
 
 function waypoint(){
 	unmode();
 	waypointButton.setSelect();
 	mode = 1;
+	if (map.getZoom() == 13){
+		onZoom13();
+	} else if (map.getZoom() == 12){
+		onZoom14();
+	} else if (map.getZoom() == 11){
+		onZoom11();
+	} else if (map.getZoom() < 11){
+		onZoom11();
+	} else if (map.getZoom() > 13){
+		onZoom13();
+	}
 }
 
 function line(){

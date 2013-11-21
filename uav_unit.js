@@ -31,6 +31,10 @@ UAV.prototype.setLeafletMarker = function(marker){
 	this.leafletMarker = marker;
 }
 
+UAV.prototype.setIcon = function(icon){
+	this.leafletMarker.setIcon(icon);
+}
+
 UAV.prototype.setVelocity = function(velocity){
 	this.velocity = velocity;
 }
